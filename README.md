@@ -15,20 +15,20 @@ Examples of basic tasks (directory creation, file creation, copying, deleting di
 ```xml
 <echo>Message included here...</echo>
 ```
-4. Create property to access environment variable in build file<br/>
+4.Create property to access environment variable in build file<br/>
 ```xml
 <property environment="env" />
 <property name="JAVA_HOME" value="${env.JAVA_HOME}" />
 ```
-5. Copying file from one directory to another
+5.Copying file from one directory to another
 ```xml
 <copy file="path-to-file(source)/file-name.extension" todir="path-to-destination" />
 ```
-6. Deleting a file
+6.Deleting a file
 ```xml
 <delete file="path-to-file/file-name.extension" />
 ```
-7. Deleting a directory
+7.Deleting a directory
 ```xml
 <delete dir="Hello-World" />
 ```
