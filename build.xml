@@ -19,7 +19,7 @@
 		<echo>
 			Writing text to 'Readme.txt' ...
 		</echo>
-		<echo file="Readme.txt" location="Hello-World/Readme.txt">
+		<echo file="Hello-World/Readme.txt">
 			Read me first...
 		</echo>
 	</target>
@@ -41,7 +41,7 @@
 
 	<!-- Copying contents from Hello-World to Destination -->
 	<target name="copy-Readme.txt-to-Destination" depends="create-Destination-dir">
-		<copy file="Hello-World/Readme.txt" todir="../Destination" />
+		<copy file="Hello-World/Readme.txt" todir="Destination/" />
 		<echo>Copying 'Readme.txt' from 'Hello-World' to 'Destination'
 			directory...</echo>
 	</target>
@@ -55,6 +55,7 @@
 		<delete dir="Hello-World" />
 		<echo>'Hello-World' directory deleted.</echo>
 	</target>
+	
 
 	<!-- For compiling -->
 	<target name="compile" depends="delete">
@@ -69,7 +70,7 @@
 	</target>
 
 	<!-- Cleaning all contents created -->
-	<target name="clean" description="clean all assets created"
+	<!-- <target name="clean" description="clean all assets created"
 		depends="run">
 		<echo>Cleaning all the resources created... Please wait !</echo>
 		<delete file="Destination/Readme.txt" />
@@ -77,4 +78,5 @@
 		<delete dir="Destination" />
 		<echo>'Destination' directory deleted.</echo>
 	</target>
+	-->
 </project>
