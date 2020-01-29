@@ -47,15 +47,14 @@
 	</target>
 
 	<!-- Delete contents of Hello-World directory -->
-	<target name="delete" description="delete Hello-World contents"
-		depends="copy-Readme.txt-to-Destination">
+	<target name="delete" description="delete Hello-World contents" depends="copy-Readme.txt-to-Destination">
 		<echo>Delete contents of 'Hello-World' directory... Please wait !</echo>
 		<delete file="Hello-World/Readme.txt" />
 		<echo>'Readme.txt' file deleted.</echo>
 		<delete dir="Hello-World" />
 		<echo>'Hello-World' directory deleted.</echo>
 	</target>
-	
+
 
 	<!-- For compiling -->
 	<target name="compile" depends="delete">
@@ -64,19 +63,18 @@
 
 	<!-- For execution of java class -->
 	<target name="run" depends="compile">
-		<java classname="com.cognizant.ant.Demo">
+		<java classname="com.practice.ant.Demo">
 			<classpath path="staging" />
 		</java>
 	</target>
 
 	<!-- Cleaning all contents created -->
-	<!-- <target name="clean" description="clean all assets created"
-		depends="run">
+	<target name="clean" description="clean all assets created" depends="compile">
 		<echo>Cleaning all the resources created... Please wait !</echo>
 		<delete file="Destination/Readme.txt" />
 		<echo>'Readme.txt' file deleted.</echo>
 		<delete dir="Destination" />
 		<echo>'Destination' directory deleted.</echo>
 	</target>
-	-->
+
 </project>
