@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Introduction to Ant - Hello World" default="run">
+
+	<!-- Create Hello-World directory -->
+	<target name="create-Hello-World-dir">
+		<mkdir dir="Hello-World" />
+		<echo>Creating 'Hello-World' directory</echo>
+	</target>
+
+	<!-- Create Readme.txt file in Hello-World dir -->
+	<target name="create-Readme-file" depends="create-Hello-World-dir">
+		<touch file="Hello-World/Readme.txt">
+		</touch>
+		<echo>'Readme.txt' file created..</echo>
+	</target>
+
+	<!-- Writing contents to the file in Readme.txt in Hello-World dir -->
+	<target name="write-to-Readme.txt" depends="create-Readme-file">
+		<echo>
+			Writing text to 'Readme.txt' ...
+		</echo>
+		<echo file="Readme.txt" location="Hello-World/Readme.txt">
+			Read me first...
+		</echo>
+	</target>
+
+	<!-- Creating properites -->
+	<target name="create-properties" depends="write-to-Readme.txt">
+		<property environment="env" />
+		<echo>Accessing environment variables...</echo>
+		<property name="JAVA_HOME" value="${env.JAVA_HOME}" />
+		<echo>Got access to 'JAVA_HOME' variable. It's value is:
+			${JAVA_HOME}...</echo>
+	</target>
+
+	<!-- Create Destination directory -->
+	<target name="create-Destination-dir" depends="create-properties">
+		<mkdir dir="Destination" />
+		<echo>Creating 'Destination' directory...</echo>
+	</target>
+
+	<!-- Copying contents from Hello-World to Destination -->
+	<target name="copy-Readme.txt-to-Destination" depends="create-Destination-dir">
+		<copy file="Hello-World/Readme.txt" todir="../Destination" />
+		<echo>Copying 'Readme.txt' from 'Hello-World' to 'Destination'
+			directory...</echo>
+	</target>
+
+	<!-- Delete contents of Hello-World directory -->
+	<target name="delete" description="delete Hello-World contents"
+		depends="copy-Readme.txt-to-Destination">
+		<echo>Delete contents of 'Hello-World' directory... Please wait !</echo>
+		<delete file="Hello-World/Readme.txt" />
+		<echo>'Readme.txt' file deleted.</echo>
+		<delete dir="Hello-World" />
+		<echo>'Hello-World' directory deleted.</echo>
+	</target>
+
+	<!-- For compiling -->
+	<target name="compile" depends="delete">
+		<javac includeantruntime="false" srcdir="./src" destdir="staging" />
+	</target>
+
+	<!-- For execution of java class -->
+	<target name="run" depends="compile">
+		<java classname="com.cognizant.ant.Demo">
+			<classpath path="staging" />
+		</java>
+	</target>
+
+	<!-- Cleaning all contents created -->
+	<target name="clean" description="clean all assets created"
+		depends="run">
+		<echo>Cleaning all the resources created... Please wait !</echo>
+		<delete file="Destination/Readme.txt" />
+		<echo>'Readme.txt' file deleted.</echo>
+		<delete dir="Destination" />
+		<echo>'Destination' directory deleted.</echo>
+	</target>
+</project>
